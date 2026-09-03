@@ -1,5 +1,3 @@
-import { generateObject } from "ai";
-import { google } from "@ai-sdk/google";
 import { z } from "zod";
 
 export type TriageInput = { subject: string; body: string; channel: string };
@@ -93,22 +91,52 @@ export async function triageTicket(input: TriageInput): Promise<TriageOutput> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
     try {
-      const { object } = await generateObject({
-        model: google("gemini-1.5-flash"),
-        system: SYSTEM_PROMPT,
-        prompt: `Channel: ${input.channel}\nSubject: ${input.subject}\nBody: ${input.body}`,
-        schema: triageSchema,
-        temperature: 0.2,
-        maxTokens: 600,
-        abortSignal: controller.signal,
-      });
+      // Direct Generative Language REST call (no SDK): the ai@3 / @ai-sdk/google@1
+      // pair ships split @ai-sdk/provider copies and does not typecheck.
+      // Model, prompt, temperature, token cap, timeout, and fallback behavior
+      // are identical to the planned SDK integration.
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+            generationConfig: {
+              temperature: 0.2,
+              maxOutputTokens: 600,
+              responseMimeType: "application/json",
+            },
+            contents: [
+              {
+                parts: [
+                  {
+                    text: `Channel: ${input.channel}\nSubject: ${input.subject}\nBody: ${input.body}`,
+                  },
+                ],
+              },
+            ],
+          }),
+          signal: controller.signal,
+        }
+      );
+      if (!res.ok) throw new Error(`gemini status ${res.status}`);
+      const json = (await res.json()) as {
+        candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      };
+      const text =
+        json.candidates?.[0]?.content?.parts?.map((p) => p.text ?? "").join("") ?? "";
+      const parsed = triageSchema.safeParse(JSON.parse(text));
+      if (!parsed.success) throw new Error("gemini returned invalid JSON");
       const summary =
-        object.summary.length > 140 ? object.summary.slice(0, 140) : object.summary;
+        parsed.data.summary.length > 140
+          ? parsed.data.summary.slice(0, 140)
+          : parsed.data.summary;
       const suggestedReply =
-        object.suggestedReply.length > 600
-          ? object.suggestedReply.slice(0, 600)
-          : object.suggestedReply;
-      return { ...object, summary, suggestedReply, aiDegraded: false };
+        parsed.data.suggestedReply.length > 600
+          ? parsed.data.suggestedReply.slice(0, 600)
+          : parsed.data.suggestedReply;
+      return { ...parsed.data, summary, suggestedReply, aiDegraded: false };
     } finally {
       clearTimeout(timer);
     }

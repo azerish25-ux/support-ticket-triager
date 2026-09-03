@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ticket {
+  id           String   @id @default(cuid())
+  subject      String   @db.VarChar(160)
+  body         String   @db.Text
+  customerName String   @db.VarChar(80)
+  channel      String   @db.VarChar(20)
+  status       String   @db.VarChar(20) @default("pending")
+  createdAt    DateTime @default(now())
+  triage       Triage?
+}
+
+model Triage {
+  id             String   @id @default(cuid())
+  ticketId       String   @unique
+  ticket         Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  category       String
+  urgency        String
+  sentiment      String
+  summary        String   @db.VarChar(280)
+  suggestedReply String   @db.Text
+  confidence     Float
+  actionTaken    String
+  aiDegraded     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+}

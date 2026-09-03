@@ -68,7 +68,7 @@ POST /api/tickets — body `{ subject: string(5..160), body: string(10..4000), c
 
 GET /api/tickets?status=open&category=bug → 200 `{ tickets: (Ticket & { triage: Triage|null })[] }`, newest first, limit 50.
 
-POST /api/tickets/[id]/approve — body `{ editedReply?: string }` → sets status closed, returns ticket. Used for human-approve demo.
+POST /api/tickets/[id]/approve — body `{ editedReply?: string; action?: "close"|"escalate" }` (default `close`; `escalate` exists for the E keybinding) → sets status closed or escalated, returns ticket. Used for human-approve demo.
 
 GET /api/stats → `{ total, byCategory: Record<string,number>, byUrgency, autoResolvedRate, escalatedCount, slaBreaches }`.
 

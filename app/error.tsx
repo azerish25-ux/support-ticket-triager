@@ -1,6 +1,6 @@
 "use client";
 
-export default function Error({ reset }: { error: Error; reset: () => void }) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="mx-auto max-w-xl p-8">
       <h1 className="text-lg font-semibold text-zinc-900">Something broke loading tickets.</h1>
