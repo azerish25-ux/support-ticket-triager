@@ -54,8 +54,8 @@ const TICKETS: Array<{ subject: string; body: string; customerName: string; chan
     channel: "chat",
   },
   {
-    subject: "Where do I find audit logs?",
-    body: "Where do I find audit logs for my workspace? Need them for a compliance review.",
+    subject: "How do I find audit logs?",
+    body: "How do I find audit logs for my workspace? Need them for a compliance review.",
     customerName: "Nina H.",
     channel: "email",
   },
