@@ -1,0 +1,175 @@
+
+> support-ticket-triager@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1516ms
+ ○ Compiling /inbox ...
+ ✓ Compiled /inbox in 2.6s (504 modules)
+ GET /inbox 200 in 2917ms
+ ✓ Compiled in 291ms (245 modules)
+ ○ Compiling /api/stats ...
+ ✓ Compiled /api/stats in 1367ms (302 modules)
+ ✓ Compiled (333 modules)
+ GET /favicon.ico 200 in 1696ms
+PrismaClientInitializationError: 
+Invalid `prisma.ticket.findMany()` invocation:
+
+
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at _n.handleRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:8049)
+    at _n.handleAndLogRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:7057)
+    at _n.request (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:6741)
+    at async l (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:130:9355)
+    at async GET (webpack-internal:///(rsc)/./app/api/tickets/route.ts:81:25)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:818:17)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  clientVersion: '5.18.0',
+  errorCode: undefined
+}
+PrismaClientInitializationError: 
+Invalid `prisma.ticket.count()` invocation:
+
+
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at _n.handleRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:8049)
+    at _n.handleAndLogRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:7057)
+    at _n.request (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:6741)
+    at async l (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:130:9355)
+    at async Promise.all (index 0)
+    at async GET (webpack-internal:///(rsc)/./app/api/stats/route.ts:13:65)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:818:17)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  clientVersion: '5.18.0',
+  errorCode: undefined
+}
+ GET /api/tickets 500 in 1718ms
+ GET /api/stats 500 in 1718ms
+PrismaClientInitializationError: 
+Invalid `prisma.ticket.findMany()` invocation:
+
+
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at _n.handleRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:8049)
+    at _n.handleAndLogRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:7057)
+    at _n.request (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:6741)
+    at async l (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:130:9355)
+    at async GET (webpack-internal:///(rsc)/./app/api/tickets/route.ts:81:25)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:818:17)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  clientVersion: '5.18.0',
+  errorCode: undefined
+}
+ GET /api/tickets 500 in 32ms
+PrismaClientInitializationError: 
+Invalid `prisma.ticket.count()` invocation:
+
+
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:7
+   | 
+ 6 |   provider = "postgresql"
+ 7 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at _n.handleRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:8049)
+    at _n.handleAndLogRequestError (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:7057)
+    at _n.request (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:121:6741)
+    at async l (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\@prisma\client\runtime\library.js:130:9355)
+    at async Promise.all (index 0)
+    at async GET (webpack-internal:///(rsc)/./app/api/stats/route.ts:13:65)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:57228
+    at async eT.execute (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:46851)
+    at async eT.handle (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\compiled\next-server\app-route.runtime.dev.js:6:58760)
+    at async doRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1366:42)
+    at async cacheEntry.responseCache.get.routeKind (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1496:28)
+    at async DevServer.renderPageComponent (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:1962:32)
+    at async DevServer.pipeImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\next-server.js:272:17)
+    at async DevServer.handleRequestImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\base-server.js:818:17)
+    at async C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:339:20
+    at async Span.traceAsyncFn (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\trace\trace.js:154:20)
+    at async DevServer.handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\dev\next-dev-server.js:336:24)
+    at async invokeRender (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:179:21)
+    at async handleRequest (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:359:24)
+    at async requestHandlerImpl (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\router-server.js:383:13)
+    at async Server.requestListener (C:\Users\shahr\Desktop\opencode projects\Project 2\node_modules\next\dist\server\lib\start-server.js:141:13) {
+  clientVersion: '5.18.0',
+  errorCode: undefined
+}
+ GET /api/stats 500 in 40ms
