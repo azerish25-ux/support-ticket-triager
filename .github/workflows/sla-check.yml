@@ -1,0 +1,23 @@
+name: sla-check
+
+# Hourly SLA escalation (free tier: Vercel Hobby allows daily cron only,
+# so the hourly beat lives here; vercel.json keeps a daily backstop).
+# Both hit the same idempotent endpoint.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger SLA check
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://support-ticket-triager.vercel.app/api/cron/sla-check" \
+            -H "Authorization: Bearer $CRON_SECRET")
+          echo "sla-check status: $code"
+          test "$code" = "200"
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
