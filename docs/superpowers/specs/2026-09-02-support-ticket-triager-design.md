@@ -10,7 +10,7 @@
 
 ## 1. Architecture
 
-Single Next.js 14 repo (App Router, TypeScript). Frontend + API routes deploy together to Vercel free as `support-ticket-triager.vercel.app`. Postgres via Neon free + Prisma ORM. AI via Vercel AI SDK calling Google Gemini 1.5 Flash (free tier), model string configurable via env to also support Groq. Mock classifier used when no key is set or on timeout, flagged in UI as demo mode. Vercel Cron calls SLA-check hourly.
+Single Next.js 14 repo (App Router, TypeScript). Frontend + API routes deploy together to Vercel free as `support-ticket-triager.vercel.app`. Postgres via Neon free + Prisma ORM. AI via Vercel AI SDK calling Google Gemini 1.5 Flash (free tier), model string configurable via env to also support Groq. Mock classifier used when no key is set or on timeout, flagged in UI as demo mode. GitHub Actions pings the SLA-check endpoint hourly; Vercel Cron runs the same endpoint daily as a backstop (Hobby plan allows daily only).
 
 Request flow (MVP, synchronous for simplicity):
 Browser form → POST /api/tickets → Zod validate → Prisma create Ticket(status=pending) → triageTicket() → Prisma create Triage → evaluateRules() → Prisma update Ticket status → return Ticket+Triage JSON → UI renders instantly.
@@ -154,7 +154,7 @@ Smoke (manual checklist + one Playwright spec if time): submit ticket → appear
 
 Local: `npm install`, copy `.env.example` → `.env` (DATABASE_URL, GEMINI_API_KEY optional, CRON_SECRET=dev-secret), `npx prisma db push`, `npm run db:seed`, `npm run dev` → http://localhost:3000/inbox.
 
-Deploy: push to GitHub → Import in Vercel → add same 3 env vars → Deploy → enable Cron in `vercel.json` (`{ "crons": [{ "path": "/api/cron/sla-check", "schedule": "0 * * * *" }] }`) → live at `https://support-ticket-triager.vercel.app/inbox`.
+Deploy: push to GitHub → Import in Vercel → add same 3 env vars → Deploy → hourly SLA beat via `.github/workflows/sla-check.yml` (`17 * * * *`, needs `CRON_SECRET` repo secret), Vercel Cron daily backstop in `vercel.json` (`{ "crons": [{ "path": "/api/cron/sla-check", "schedule": "0 0 * * *" }] }`) → live at `https://support-ticket-triager.vercel.app/inbox`.
 
 `.env.example` contains placeholder values only, never real keys.
 

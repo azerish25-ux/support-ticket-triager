@@ -17,7 +17,7 @@
 - AI model string is exactly `gemini-1.5-flash` via `google("gemini-1.5-flash")`; temperature 0.2, maxTokens 600, AbortController timeout 8000ms; any failure falls back to mock with `aiDegraded: true`; missing key uses mock with `aiDegraded: false`.
 - AI summary <= 140 chars, suggestedReply <= 600 chars, plain tone, no emoji, never the phrase "As an AI".
 - Ticket status is exactly one of `pending | open | escalated | auto-resolved | closed`. Category is exactly one of `billing | bug | feature | account | how-to`. Urgency is exactly one of `low | medium | high | critical`. Sentiment is exactly one of `angry | frustrated | neutral | happy`.
-- Cron path is exactly `/api/cron/sla-check`, schedule `0 * * * *`, authorized via `Authorization: Bearer ${CRON_SECRET}`, 401 otherwise.
+- Cron path is exactly `/api/cron/sla-check`, authorized via `Authorization: Bearer ${CRON_SECRET}`, 401 otherwise. Hourly beat runs via GitHub Actions (`.github/workflows/sla-check.yml`, `17 * * * *`); `vercel.json` keeps a daily backstop (`0 0 * * *`) because Vercel Hobby allows daily cron only.
 - SLA breach means status `open` or `pending` AND urgency `high` or `critical` AND age over 4 hours.
 - UI is an internal tool, not a landing page: `/` redirects to `/inbox`. No gradients, no glow, no glassmorphism, no emoji icons (lucide only), no sparkles, no words "supercharge / delight / unleash", no centered hero, no 3-card features grid, no testimonials, no dark-mode neon. Project name in UI is plain "Support tickets".
 - Out of scope v1: auth/multi-user, sending email, file uploads, websockets, admin panel, billing, mobile app, dark-mode toggle, i18n.
