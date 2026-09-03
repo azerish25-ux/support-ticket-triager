@@ -22,6 +22,8 @@
 
 # debug
 npm-debug.log*
+dev.log
+inbox-check.png
 yarn-debug.log*
 yarn-error.log*
 
