@@ -1,3 +1,7 @@
+import { generateObject } from "ai";
+import { google } from "@ai-sdk/google";
+import { z } from "zod";
+
 export type TriageInput = { subject: string; body: string; channel: string };
 
 export type TriageOutput = {
@@ -72,4 +76,43 @@ export function mockClassify(input: TriageInput): TriageOutput {
     confidence,
     aiDegraded: false,
   };
+}
+
+const triageSchema = z.object({
+  category: z.enum(["billing", "bug", "feature", "account", "how-to"]),
+  urgency: z.enum(["low", "medium", "high", "critical"]),
+  sentiment: z.enum(["angry", "frustrated", "neutral", "happy"]),
+  summary: z.string().max(280),
+  suggestedReply: z.string().max(2000),
+  confidence: z.number().min(0).max(1),
+});
+
+export async function triageTicket(input: TriageInput): Promise<TriageOutput> {
+  if (!process.env.GEMINI_API_KEY) return mockClassify(input);
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const { object } = await generateObject({
+        model: google("gemini-1.5-flash"),
+        system: SYSTEM_PROMPT,
+        prompt: `Channel: ${input.channel}\nSubject: ${input.subject}\nBody: ${input.body}`,
+        schema: triageSchema,
+        temperature: 0.2,
+        maxTokens: 600,
+        abortSignal: controller.signal,
+      });
+      const summary =
+        object.summary.length > 140 ? object.summary.slice(0, 140) : object.summary;
+      const suggestedReply =
+        object.suggestedReply.length > 600
+          ? object.suggestedReply.slice(0, 600)
+          : object.suggestedReply;
+      return { ...object, summary, suggestedReply, aiDegraded: false };
+    } finally {
+      clearTimeout(timer);
+    }
+  } catch {
+    return { ...mockClassify(input), aiDegraded: true };
+  }
 }
